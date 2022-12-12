@@ -48,3 +48,9 @@ bash xdnft.sh
 ![xd nft wizard](https://xchdev.com/images/xd-nft-wizard.png)
 
 ![xd nft wizard](https://xchdev.com/images/xd-nft-wizard-2.png)
+
+![xd nft wizard](https://xchdev.com/images/xd-nft-wizard-3.png)
+
+![xd nft wizard](https://xchdev.com/images/xd-nft-wizard-4.png)
+
+![xd nft wizard](https://xchdev.com/images/xd-nft-wizard-5.png)
