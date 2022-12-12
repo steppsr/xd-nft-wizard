@@ -33,5 +33,5 @@ bash xdnft.sh
 
 
 ## Screenshot
-[xd nft wizard](https://xchdev.com/images/xd-nft-wizard.png)
+![xd nft wizard](https://xchdev.com/images/xd-nft-wizard.png)
 
