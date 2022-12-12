@@ -31,6 +31,18 @@ bash xdnft.sh
 2. Send NFT to Wallet Address - this will use the given NFT ID and Destination Address and generate
    the command to run to send the NFT. You will also be asked if you wish to run the command.
 
+3. Get list of my NFTs
+
+4. Get list of NFT IDs from Collection
+
+5. Get list of Owner Wallets from NFT IDs
+
+6. Get list of NFT Names from NFT IDs
+
+7. Name generators
+   A. Droid Name Generator
+   B. Norby Name Generator
+   C. Random Name Picker
 
 ## Screenshot
 ![xd nft wizard](https://xchdev.com/images/xd-nft-wizard.png)
