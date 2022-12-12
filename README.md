@@ -32,3 +32,6 @@ bash xdnft.sh
    the command to run to send the NFT. You will also be asked if you wish to run the command.
 
 
+## Screenshot
+[xd nft wizard](https://xchdev.com/images/xd-nft-wizard.png)
+
