@@ -1,6 +1,8 @@
 # xd-nft-wizard
 xd nft wizard is a interactive Bash script to help with Chia NFTs. 
 
+**Tip:** Credit to Mintgarden API for powering many of the features of this script.
+
 ## Download
 You can download the following files individually, or grab the latest release. Put the files into
 a folder you create for the application. I like to do this in my home directory.
