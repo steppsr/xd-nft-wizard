@@ -1,22 +1,30 @@
 # xd-nft-wizard
 xd nft wizard is a interactive Bash script to help with Chia NFTs. 
 
-## Requiements
-You may need to install the following tools if you don't already have them. Run `which toolname` from the 
-command line, where toolname is one of the tools below to see if there is one installed on your machine. If
-the command returns a path, then you have the tool. If it does not, then you may need to install the tool.
+## Download
+You can download the following files individually, or grab the latest release. Put the files into
+a folder you create for the application. I like to do this in my home directory.
 
-**Required tools:**
+To create a folder for the application in your home directory:
+```
+cd
+mkdir xdnft
+```
+
+## Install
+There are a couple of require utilities that will be installed if not already on your system.
 1. curl
 2. jq
 
+To run the install:
+`bash install.sh`
+
+Follow any on screen prompts. It will ask you to reload your user profile after it completes:
+`source ~/.bashrc`
+
 ## Running the command
-Use the `bash` command to run the script. You can also use redirect to send the output to a file.
-
-Example:
 ```
-bash xdnft.sh
-
+xdnft
 ```
 
 ## Actions available
@@ -40,6 +48,7 @@ bash xdnft.sh
    C. Random Name Picker
 
 ## Screenshots
+
 ![xd nft wizard](https://xchdev.com/images/xd-nft-wizard_1.png)
 
 ![xd nft wizard](https://xchdev.com/images/xd-nft-wizard_2.png)

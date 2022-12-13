@@ -14,7 +14,7 @@ bldpur='\e[1;35m' # Bold Purple
 txtrst='\e[0m'    # Text Reset
 
 display_banner() {
-version="0.2"
+version="0.3"
 echo -e "${bldgrn}"
 echo -e "          _          __ _              _                  _ "
 echo -e "         | |        / _| |            (_)                | |"
@@ -62,9 +62,9 @@ get_wallet_id () {
       for id in $nft_id_list; do
          if [ "$id" == "$nft_id" ]; then
             nft_json=`curl -s https://api.mintgarden.io/nfts/$id`
-            nft_coin_id=`echo "$nft_json" | jq '.id' | cut -c 2- | rev | cut -c 2- | rev`
-            nft_collection=`echo "$nft_json" | jq '.data.metadata_json.collection.name' | cut -c 2- | rev | cut -c 2- | rev`
-            nft_name=`echo "$nft_json" | jq '.data.metadata_json.name' | cut -c 2- | rev | cut -c 2- | rev`
+            nft_coin_id=`echo "$nft_json" | jq '.id' | cut --fields 2 --delimiter=\"`
+            nft_collection=`echo "$nft_json" | jq '.data.metadata_json.collection.name' | cut --fields 2 --delimiter=\"`
+            nft_name=`echo "$nft_json" | jq '.data.metadata_json.name' | cut --fields 2 --delimiter=\"`
             echo -e "NFT ID:         ${txtrst}$id${txtgrn}"
             echo -e "NFT Collection: ${txtrst}$nft_collection${txtgrn}"
             echo -e "NFT Name:       ${txtrst}$nft_name${txtgrn}"
@@ -98,7 +98,7 @@ echo " 4. Get list of NFT IDs from Collection"
 echo " 5. Get list of Owner Wallets from NFT IDs"
 echo " 6. Get list of NFT Names from NFT IDs"
 echo " 7. Name generators"
-echo " X. Exit"
+echo " x. Exit"
 echo ""
 read -p "Selection: " menu_selection
 
@@ -180,34 +180,38 @@ if [ "$menu_selection" == "3" ]; then
    wallet_list=`chia wallet show -w nft | grep "Wallet ID" | cut -c 28- | tr '\n' ' '`
    echo -e "NFT Wallets: ${txtrst}$wallet_list${bldgrn}"
    echo ""
-   read -p "Wallet ID, or [Enter] for all? " answer_wallet
-   if [ "$answer_wallet" != "" ]; then
-      wallet_list="$answer_wallet"
-   fi
+   read -p "Wallet ID, or [Enter] for all, or [x] to cancel? " answer_wallet
 
-   all=0
-   for val in $wallet_list; do
+   if [ "$answer_wallet" != "X" ] && [ "$answer_wallet" != "x" ]; then
 
-      echo ""
-      echo "==== Wallet ID: $val ===="
+	   if [ "$answer_wallet" != "" ]; then
+	      wallet_list="$answer_wallet"
+	   fi
 
-      c=`chia wallet nft list -i $val | grep "NFT identifier" | wc -l`
-      nft_ids=`chia wallet nft list -i $val | grep "NFT identifier" | cut -c 28-`
+	   all=0
+	   for val in $wallet_list; do
 
-      for id in $nft_ids; do
-         nft_json=`curl -s https://api.mintgarden.io/nfts/$id`
-         nft_collection=`echo "$nft_json" | jq '.data.metadata_json.collection.name' | cut -c 2- | rev | cut -c 2- | rev`
-         nft_name=`echo "$nft_json" | jq '.data.metadata_json.name' | cut -c 2- | rev | cut -c 2- | rev`
-         echo -e "${txtrst}$id [$nft_collection] $nft_name${bldgrn}"
-      done
+	      echo ""
+	      echo "==== Wallet ID: $val ===="
 
-      echo -e "Wallet Total: ${txtrst}$c${bldgrn}"
-      all=$(($all+$c))
+	      c=`chia wallet nft list -i $val | grep "NFT identifier" | wc -l`
+	      nft_ids=`chia wallet nft list -i $val | grep "NFT identifier" | cut -c 28-`
 
-   done
+	      for id in $nft_ids; do
+	         nft_json=`curl -s https://api.mintgarden.io/nfts/$id`
+	         nft_collection=`echo "$nft_json" | jq '.data.metadata_json.collection.name' | cut --fields 2 --delimiter=\"`
+	         nft_name=`echo "$nft_json" | jq '.data.metadata_json.name' | cut --fields 2 --delimiter=\"`
+	         echo -e "${txtrst}$id [$nft_collection] $nft_name${bldgrn}"
+	      done
 
-	echo ""
-	echo -e "Total number of NFTs: ${txtrst}$all${bldgrn}"
+	      echo -e "Wallet Total: ${txtrst}$c${bldgrn}"
+	      all=$(($all+$c))
+
+	   done
+
+		echo ""
+		echo -e "Total number of NFTs: ${txtrst}$all${bldgrn}"
+    fi
 fi
 
 ###########################################################
@@ -224,10 +228,12 @@ if [ "$menu_selection" == "4" ]; then
    echo -e "For example:   ${txtrst}col1kmrzafjx6ej8w79tz5vnjt4w8xuq2p6nmnheelgwwu3rsgsar0fsxc4wud${bldgrn}"
    echo -e ""
    read -p "Collection ID? " collection_id
-   nfts=`curl -s https://api.mintgarden.io/collections/$collection_id/nfts/ids`
-   echo "${txtrst}"
-   echo "$nfts" | jq '.[].encoded_id' | cut -c 2- | rev | cut -c 2- | rev
-   echo -e "${txtgrn}"
+   if [ "$collection_id" != "X" ] && [ "$collection_id" != "x" ]; then
+	   nfts=`curl -s https://api.mintgarden.io/collections/$collection_id/nfts/ids`
+	   echo -e "${txtrst}"
+	   echo "$nfts" | jq '.[].encoded_id' | cut --fields 2 --delimiter=\"
+	   echo -e "${txtgrn}"
+   fi
 fi
 
 ###########################################################
@@ -259,8 +265,8 @@ if [ "$menu_selection" == "5" ]; then
    n=1
    for id in $nft_ids; do
       nft_json=`curl -s https://api.mintgarden.io/nfts/$id`
-      nft_id=`echo "$nft_json" | jq '.encoded_id' | cut -c 2- | rev | cut -c 2- | rev`
-      nft_owner_wallet=`echo "$nft_json" | jq '.owner_address.encoded_id' | cut -c 2- | rev | cut -c 2- | rev`
+      nft_id=`echo "$nft_json" | jq '.encoded_id' | cut --fields 2 delimiter=\"`
+      nft_owner_wallet=`echo "$nft_json" | jq '.owner_address.encoded_id' | cut --fields 2 --delimiter=\"`
       #outputting to the console screen slows the script down
       if [ "$output_type" == "S" ] || [ "$output_type" == "s" ]; then
          echo -e "${txtrst}$n. $id $nft_owner_wallet${bldgrn}"
@@ -301,8 +307,8 @@ if [ "$menu_selection" == "6" ]; then
    n=1
    for id in $nft_ids; do
       nft_json=`curl -s https://api.mintgarden.io/nfts/$id`
-      nft_id=`echo "$nft_json" | jq '.encoded_id' | cut -c 2- | rev | cut -c 2- | rev`
-      nft_name=`echo "$nft_json" | jq '.data.metadata_json.name' | cut -c 2- | rev | cut -c 2- | rev`
+      nft_id=`echo "$nft_json" | jq '.encoded_id' | cut --fields 2 --delimiter=\"`
+      nft_name=`echo "$nft_json" | jq '.data.metadata_json.name' | cut --fields 2 --delimiter=\"`
       if [ "$output_type" == "S" ] || [ "$output_type" == "s" ]; then
          echo -e "${txtrst}$nft_id,$nft_name${bldgrn}"
       fi
