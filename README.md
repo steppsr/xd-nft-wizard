@@ -17,10 +17,14 @@ There are a couple of require utilities that will be installed if not already on
 2. jq
 
 To run the install:
-`bash install.sh`
+```
+bash install.sh
+```
 
 Follow any on screen prompts. It will ask you to reload your user profile after it completes:
-`source ~/.bashrc`
+```
+source ~/.bashrc
+```
 
 ## Running the command
 ```
