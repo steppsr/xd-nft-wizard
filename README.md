@@ -44,7 +44,7 @@ bash xdnft.sh
    B. Norby Name Generator
    C. Random Name Picker
 
-## Screenshot
+## Screenshots
 ![xd nft wizard](https://xchdev.com/images/xd-nft-wizard.png)
 
 ![xd nft wizard](https://xchdev.com/images/xd-nft-wizard-2.png)
