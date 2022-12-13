@@ -9,11 +9,6 @@ the command returns a path, then you have the tool. If it does not, then you may
 **Required tools:**
 1. curl
 2. jq
-3. xargs
-4. rev
-5. grep
-6. cut
-7. wc
 
 ## Running the command
 Use the `bash` command to run the script. You can also use redirect to send the output to a file.
@@ -45,12 +40,12 @@ bash xdnft.sh
    C. Random Name Picker
 
 ## Screenshots
-![xd nft wizard](https://xchdev.com/images/xd-nft-wizard.png)
+![xd nft wizard](https://xchdev.com/images/xd-nft-wizard_1.png)
 
-![xd nft wizard](https://xchdev.com/images/xd-nft-wizard-2.png)
+![xd nft wizard](https://xchdev.com/images/xd-nft-wizard_2.png)
 
-![xd nft wizard](https://xchdev.com/images/xd-nft-wizard-3.png)
+![xd nft wizard](https://xchdev.com/images/xd-nft-wizard_3.png)
 
-![xd nft wizard](https://xchdev.com/images/xd-nft-wizard-4.png)
+![xd nft wizard](https://xchdev.com/images/xd-nft-wizard_4.png)
 
-![xd nft wizard](https://xchdev.com/images/xd-nft-wizard-5.png)
+![xd nft wizard](https://xchdev.com/images/xd-nft-wizard_5.png)
