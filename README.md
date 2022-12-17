@@ -53,6 +53,13 @@ xdnft
    B. Norby Name Generator
    C. Random Name Picker
 
+8. Pick Random NFT with Option to Airdrop
+   A. Randomly select one from all my NFTs
+   B. Randomly select one from a specific Wallet ID
+   C. Randomly select one from a specific Collection
+
+9. Batch Move NFTs to Profile/DID
+
 ## Screenshots
 
 ![xd nft wizard](https://xchdev.com/images/xd-nft-wizard_1.png)
